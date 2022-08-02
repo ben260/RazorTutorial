@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using RazorTutorialWeb.Data;
+
 namespace RazorTutorialWeb
 {
     public class Program
@@ -8,7 +11,8 @@ namespace RazorTutorialWeb
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-
+            builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnection")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
