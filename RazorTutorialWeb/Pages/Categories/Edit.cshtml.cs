@@ -5,18 +5,19 @@ using RazorTutorialWeb.Model;
 
 namespace RazorTutorialWeb.Pages.Categories
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
         [BindProperty]
         public Category Category { get; set; }
         private readonly ApplicationDbContext _db;
 
-        public CreateModel(ApplicationDbContext db)
+        public EditModel(ApplicationDbContext db)
         {
             _db = db;
         }
-        public void OnGet()
+        public void OnGet(int id)
         {
+            Category = _db.Category.Find(id);
         }
 
         public async Task<IActionResult> OnPost()
@@ -27,9 +28,9 @@ namespace RazorTutorialWeb.Pages.Categories
             }
             if (ModelState.IsValid)
             {
-                await _db.Category.AddAsync(Category);
+                _db.Category.Update(Category);
                 await _db.SaveChangesAsync();
-                TempData["success"] = "Category created successfully";
+                TempData["success"] = "Category edited successfully";
                 return RedirectToPage("Index");
             }
             return Page();
