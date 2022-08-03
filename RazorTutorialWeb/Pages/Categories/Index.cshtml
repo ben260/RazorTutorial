@@ -3,6 +3,40 @@
 @{
 }
 
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category list</h2>
+        </div>
+        <div class="col-6">
+           <a asp-page="create" class="btn btn-primary">Create</a>
+        </div>
+        <div class="col-6">
+            <h2 class="text-primary"></h2>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped width='100%'">
+        <thead>
+            <tr>
+                <th width="50%">
+                    Category name
+                </th>
+                <th>
+                    Display Order
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var obj in Model.Categories){<tr>
+                <td width="50%">@obj.Name</td>
+                <td width="50%">@obj.DisplayOrder</td>
+            </tr>}
+        </tbody>
+    </table>
+
+</div>
+
 
 @Model.Categories.First().Name
 
